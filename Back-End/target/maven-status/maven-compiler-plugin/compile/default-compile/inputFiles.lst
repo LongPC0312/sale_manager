@@ -1,0 +1,16 @@
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\dtos\LoginDto.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\services\impls\TaiKhoanServiceImpl.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\securities\CustomSuccessHandler.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\securities\CustomUserDetails.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\services\impls\TaiKhoanService.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\repositories\TaiKhoanRepository.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\securities\WebCorConfig.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\SaleManagerApplication.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\controllers\AdministratorController.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\securities\CustomFailureHandler.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\securities\JwtService.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\securities\UserDetailsServiceImpl.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\securities\JwtAuthenticationFilter.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\securities\SecurityConfig.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\controllers\LoginController.java
+D:\HoangLong\Solo Project\sale_manager\Back-End\src\main\java\sale_manager\models\TaiKhoanModel.java
