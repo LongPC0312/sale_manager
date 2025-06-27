@@ -9,21 +9,17 @@ const requestNewAccessToken = async() =>{
     try{
         const response = await axios.post("http://localhost:8080/api/refreshtoken",{
             refreshToken: refreshToken,
-        })
-        if(response.data.success){
+        }) 
             const newAccessToken = response.data.accessToken;
             if (newAccessToken) {
                 localStorage.setItem("accessToken", newAccessToken);
+                localStorage.getItem("role");
                 console.log("AccessToken đã được cập nhật.");
                 return newAccessToken;
               } else {
                 console.error("Không nhận được accessToken mới từ BE.");
                 return null;
-              }
-        }
-        else{
-            console.log(response.data.message);
-        }
+              }              
     }
     catch (error) {
               console.error("Lỗi khi gọi API refresh token:", error.response?.data?.message || error.message);

@@ -8,7 +8,7 @@ const Login = () => {
         password:"",
     });
     const [message, setMessage] = useState("");
-    const [success, setSuccess] = useState(null);
+    const [success, setSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
        
@@ -47,8 +47,7 @@ const Login = () => {
             setIsLoading(true);
             try{    
                 const response = await axios.post( "http://localhost:8080/taikhoan/dangnhap", formData);
-                setSuccess(response.data.success);
-                setMessage(response.data.message);
+   
                 if(response.data.success){
                   const rolePlayer = response.data.role[0].authority;
                   localStorage.setItem("accessToken", response.data.accessToken);
@@ -56,12 +55,10 @@ const Login = () => {
                   localStorage.setItem("username", response.data.username);
                   localStorage.setItem("role", rolePlayer);                  
                   navigate(routeByRole(rolePlayer));
-                  console.log(routeByRole(rolePlayer));
-                  console.log(rolePlayer);
+                  setMessage(response.data.message);
                 }
             }
             catch(error){
-                setSuccess(false);
                 setMessage(error.response?.data?.message || "Lỗi server");
                 console.log("Lỗi kiểm tra đăng nhập:", error);
             }
@@ -88,7 +85,12 @@ const Login = () => {
           onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           placeholder="Enter your password"
         />
-        {message && <p className="text-blue-500 mb-4">{message}</p>}
+        {message && (
+          <p className={`mb-4 ${success ? "text-green-500" : "text-red-500"}`}>
+            {message}
+          </p>
+        )}
+
         <button
           type="submit"
           disabled={isLoading}

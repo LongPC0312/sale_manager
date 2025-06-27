@@ -18,4 +18,6 @@ public class LoginDto {
 	@Pattern(regexp="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{6,18}$",
 			 message= "Mật khẩu chưa ít nhất 1 chữ thường, 1 chữ hoa, 1 số và không có bất kỳ ký tự đặc biệt nào")
 	private String password;
+	
+	
 }

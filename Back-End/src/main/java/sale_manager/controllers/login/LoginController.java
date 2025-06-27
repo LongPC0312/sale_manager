@@ -47,9 +47,9 @@ public class LoginController {
 			UsernamePasswordAuthenticationToken authToken = 
 					new UsernamePasswordAuthenticationToken(account.getUsername(), account.getPassword());					
 			Authentication authentication = authManager.authenticate(authToken);
-	        UserDetails userDetails =  (UserDetails) authentication.getPrincipal();
-	        String accessToken = jwtService.generateToken(userDetails.getUsername());
-	        String refreshToken = jwtService.refreshToken(userDetails.getUsername());
+	        UserDetails userDetails =   (UserDetails) authentication.getPrincipal();
+	        String accessToken = jwtService.generateToken(userDetails);
+	        String refreshToken = jwtService.refreshToken(userDetails);
 	        response.put("success", true);
 	        response.put("message", "Đăng nhập thành công");
 	        response.put("accessToken", accessToken);

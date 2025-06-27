@@ -24,7 +24,7 @@ public class SecurityConfig {
 			.and()
 			.csrf(csrf -> csrf.disable())
 			.authorizeHttpRequests(auth -> auth
-					.requestMatchers("/taikhoan/dangnhap").permitAll()
+					.requestMatchers("/taikhoan/dangnhap", "/api/refreshtoken").permitAll()
 					.requestMatchers("/taikhoan/admin/**").hasRole("ADMIN")
 					.requestMatchers("/taikhoan/manager/**").hasRole("MANAGER")
 					.requestMatchers("/taikhoan/customer/**").hasRole("CUSTOMER")

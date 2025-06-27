@@ -3,8 +3,12 @@ package sale_manager.securities;
 
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -13,21 +17,30 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtService {
+	
 	private final String SECRET_KEY= "mySecretKey1234567890";
-	private final long ACCESS_EXPIRATION= 1000*60*15;
+	private final long ACCESS_EXPIRATION= 1000*60;
 	private final long REFRESH_EXPIRATION= 1000*60*60*24*7;
 	
-	public String generateToken(String username) {
-		return buildToken(username, ACCESS_EXPIRATION);
+	
+	public String generateToken(UserDetails userDetails) {
+		return buildToken(userDetails, ACCESS_EXPIRATION);
 	}
 	
-	public String refreshToken(String username) {
-		return buildToken(username, REFRESH_EXPIRATION);
+	public String refreshToken(UserDetails userDetails) {
+		return buildToken(userDetails, REFRESH_EXPIRATION);
 	}
 	
-	public String buildToken(String username, long expireMs) {
+	public String buildToken(UserDetails userDetails, long expireMs) {
+		Map<String, Object> claim = new HashMap<>();
+		List<String> roles = userDetails.getAuthorities().stream()
+		        .map(authority -> authority.getAuthority())
+		        .toList(); // 
+		claim.put("role", roles);
+		
 		return Jwts.builder()
-				.setSubject(username)
+				.setClaims(claim)
+				.setSubject(userDetails.getUsername())
 				.setIssuedAt(new Date())
 				.setExpiration(new Date(System.currentTimeMillis()+ expireMs))
 				.signWith(SignatureAlgorithm.HS256, SECRET_KEY)

@@ -6,9 +6,9 @@ const api = axios.create({ baseURL: "http://localhost:8080" });
 /* ① request-interceptor: tự gắn token mỗi lần gửi */
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("accessToken");
-  if (token){
+  if (!config.url.includes("/api/refreshtoken")) {   
     config.headers.Authorization = "Bearer " + token;
-  }
+  }  
   return config;
 },
     (error) => {
@@ -17,18 +17,19 @@ api.interceptors.request.use((config) => {
   });
 
 /* ② response-interceptor: tự refresh khi 401 */
-api.interceptors.response.use((res) => res, async (err) => {
+api.interceptors.response.use(
+  (res) => res,
+  async (err) => {
     const original = err.config;
-    if (err.response?.status === 401 && !original._retry) {
+    if ((err.response?.status === 401 || err.response?.status === 403) && !original._retry) {
       original._retry = true;
       const newToken = await requestNewAccessToken();
       if (newToken) {
         original.headers.Authorization = "Bearer " + newToken;
-        return api(original);           
-      }
-      else{
+        return api(original);  
+      } else {
         localStorage.clear();
-        window.location.href= "/login";
+        window.location.href = "/login";
       }
     }
     return Promise.reject(err);
